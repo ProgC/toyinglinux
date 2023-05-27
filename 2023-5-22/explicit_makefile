@@ -1,0 +1,33 @@
+# Makefile for building multiple executables
+
+CFLAGS = -c
+CC = cc
+LD = cc
+
+LDLIBS = -lpthread
+MYLIBS = mylib.o
+
+all: prog1 prog2
+
+# This rule build *.o from *.c. This rule is optional because it is implicit.
+# Both rules work.
+.c.o:
+# $(CC) $(CFLAGS) $<
+	@echo "start .c.o"
+	$(CC) $(CFLAGS) $*.c
+	@echo "end .c.o"
+
+prog1: prog1.o $(MYLIBS)
+	@echo "start prog1"
+	$(CC) -o $@ $(@).o $(MYLIBS) $(LDLIBS)
+	@echo "end prog1"
+
+prog2: prog2.o $(MYLIBS)
+	@echo "start prog2"
+	$(CC) -o $@ $(@).o $(MYLIBS) $(LDLIBS)
+	@echo "end prog2"
+
+clean:
+	rm -fr prog1 prog1.o prog2 prog2.o $(MYLIBS)
+
+
