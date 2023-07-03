@@ -1,0 +1,4 @@
+set title "old" O, -1
+set data linespoints
+plot 1 2 4
+
